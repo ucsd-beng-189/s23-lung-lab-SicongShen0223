@@ -2,17 +2,19 @@
 clear all
 clf
 
-% only for task 3
-beta_vec = [0:0.1:1];
+% only for task 5
 global Pstar cstar n maxcount M Q camax RT cI;
+cI_vec = [0:0.01:1];
 
-for i = 1:length(beta_vec)
-    beta = beta_vec(i);
+for j = 1:length(cI_vec)
+    cI = cI_vec(j);
+end
+
+for i = 1:length(cI_vec)
     setup_lung
     cvsolve
     outchecklung
-    % record inspired partial pressure of oxygen
-    PI_vec(i) = PI;
+
     % record mean alveolar partial pressure of oxygen
     PAbar_vec(i) = PAbar;
     % record mean arterial partial pressure of oxygen
@@ -20,38 +22,68 @@ for i = 1:length(beta_vec)
     % record venous partial pressure of oxygen
     Pv_vec(i) = Pv;
 
+    % record mean alveolar partial concentration of oxygen
+    cAbar_vec(i) = cAbar;
+    % record mean arterial partial concentration of oxygen
+    cabar_vec(i) = cabar;
+    % record venous concentration of oxygen
+    cv_vec(i) = cv; 
 end
 
-% plot PI v.s. beta
+%% first set: plot mean partial pressures v.s. cI
+% plot PAbar v.s. cI
 figure;
-plot(beta_vec,PI_vec,'-o');
-title('Inspired partial pressure of oxygen v.s. beta');
-xlabel('beta'); ylabel('PI');
+subplot(2,2,1);
+plot(cI_vec,PAbar_vec,'-o');
+title('mean alveolar partial pressure of oxygen v.s. cI');
+xlabel('cI'); ylabel('PAbar');
 
-% plot beta v.s. PAbar
-figure;
-plot(beta_vec,PAbar_vec,'-o');
-title('mean alveolar partial pressure of oxygen v.s. beta');
-xlabel('beta'); ylabel('PAbar');
+% plot Pabar v.s. cI
+subplot(2,2,2);
+plot(cI_vec,Pabar_vec,'-o');
+title('mean arterial partial pressure of oxygen v.s. cI');
+xlabel('cI'); ylabel('Pabar');
 
-% plot beta v.s. Pabar
-figure;
-plot(beta_vec,Pabar_vec,'-o');
-title('mean arterial partial pressure of oxygen v.s. beta');
-xlabel('beta'); ylabel('Pabar');
-
-% plot beta v.s. Pv
-figure;
-plot(beta_vec,Pv_vec,'-o');
-title('venous partial pressure of oxygen v.s. beta');
-xlabel('beta'); ylabel('Pv');
+% plot Pv v.s. cI
+subplot(2,2,3);
+plot(cI_vec,Pv_vec,'-o');
+title('venous partial pressure of oxygen v.s. cI');
+xlabel('cI'); ylabel('Pv');
 
 % plot everything in one figure;
+subplot(2,2,4);
+plot(cI_vec,PAbar_vec,'-o'); hold on;
+plot(cI_vec,Pabar_vec,'-o'); hold on;
+plot(cI_vec,Pv_vec,'-o'); 
+legend('PAbar','Pabar','Pv');
+title('partial pressure at different location v.s. cI');
+xlabel('cI'); ylabel('partial pressure');
+
+%% second set: plot mean concentration versus cI
+% plot cAbar v.s. cI
 figure;
-plot(beta_vec,PI_vec,'-o'); hold on;
-plot(beta_vec,PAbar_vec,'-o'); hold on;
-plot(beta_vec,Pabar_vec,'-o'); hold on;
-plot(beta_vec,Pv_vec,'-o'); 
-legend('PI','PAbar','Pabar','Pv');
-title('partial pressure at different location v.s. beta');
-xlabel('beta'); ylabel('partial pressure');
+subplot(2,2,1);
+plot(cI_vec,cAbar_vec,'-o');
+title('mean alveolar concentration of oxygen v.s. cI');
+xlabel('cI'); ylabel('cAbar');
+
+% plot cabar v.s. cI
+subplot(2,2,2);
+plot(cI_vec,cabar_vec,'-o');
+title('mean arterial concentration of oxygen v.s. cI');
+xlabel('cI'); ylabel('cabar');
+
+% plot cvbar v.s. cI
+subplot(2,2,3);
+plot(cI_vec,cv_vec,'-o');
+title('venous concentration of oxygen v.s. cI');
+xlabel('cI'); ylabel('cv');
+
+% plot everything in one figure
+subplot(2,2,4);
+plot(cI_vec,cAbar_vec,'-o'); hold on;
+plot(cI_vec,cabar_vec,'-o'); hold on;
+plot(cI_vec,cv_vec,'-o'); 
+legend('cAbar','cabar','cv')
+title('concentration of oxygen at different location v.s. cI');
+xlabel('cI'); ylabel('concentration');
