@@ -52,6 +52,4 @@ plot(beta_vec,PI_vec,'-o'); hold on;
 plot(beta_vec,PAbar_vec,'-o'); hold on;
 plot(beta_vec,Pabar_vec,'-o'); hold on;
 plot(beta_vec,Pv_vec,'-o'); 
-legend('PI','PAbar','Pabar','Pv');
-title('partial pressure at different location v.s. beta');
-xlabel('beta'); ylabel('partial pressure');
+legend('PI','PAbar','Pabar','Pv')
