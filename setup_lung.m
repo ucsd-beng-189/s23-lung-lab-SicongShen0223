@@ -11,7 +11,7 @@ maxcount=20
 n=100
 %
 %reference oxygen concentration (moles/liter):
-cref=0.2/(22.4*(310/273))
+%cref=0.2/(22.4*(310/273))
 %cref=concentration of oxygen 
 %in air at sea level at body temperature
 %
@@ -63,8 +63,8 @@ av=(a1+a2)/2;
 VA=VAbar*(a1*beta+av*(1-beta));
 Q = Qbar*(a2*beta+av*(1-beta));
 r=VA./Q;
-figure(1)
-plot(Q,VA,'.')
+% figure(1)
+% plot(Q,VA,'.')
 
 %find actual values of 
 %VAtotal, Qtotal, VAbar, and Qbar:
