@@ -1,14 +1,18 @@
 %filename: lung.m (main program)
 clear all
-clf
+clc
 global Pstar cstar n maxcount M Q camax RT cI;
 
-altitude = 0:1:99;
-mole_standard = 22.4 + altitude;
-cref_vec = 0.2./(mole_standard.*(310/273));
+% this following 2 lines are for task 6:
+% altitude = 0:1:99;
+% mole_standard = 22.4 + altitude;
 
-for i = 1:length(cref_vec)
-    cref = cref_vec(i);
+cref = 0.2./((22.4+99).*(310/273));
+beta_vec = 0:0.1:0.6
+
+for i = 1:length(beta_vec)
+    % cref = cref_vec(i);
+    beta = beta_vec(i);
     setup_lung
     cvsolve
     outchecklung
@@ -30,49 +34,49 @@ end
 %% set 1: partial pressure v.s. altitude
 figure;
 subplot(2,2,1);
-plot(altitude,PAbar_vec,'-o');
-title('mean alveolar O2 partial pressure v.s. altitude ');
-xlabel('altitude'); ylabel('PA');
+plot(beta_vec,PAbar_vec,'-o');
+title('mean alveolar O2 partial pressure v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('PA');
 
 subplot(2,2,2);
-plot(altitude,Pabar_vec,'-o');
-title('mean arterial O2 partial pressure v.s. altitude');
-xlabel('altitude'); ylabel('Pa');
+plot(beta_vec,Pabar_vec,'-o');
+title('mean arterial O2 partial pressure v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('Pa');
 
 subplot(2,2,3);
-plot(altitude,Pv_vec,'-o');
-title('venous O2 partial pressure v.s. altitude');
-xlabel('altitude'); ylabel('Pv');
+plot(beta_vec,Pv_vec,'-o');
+title('venous O2 partial pressure v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('Pv');
 
 subplot(2,2,4);
-plot(altitude,PAbar_vec,'-o'); hold on;
-plot(altitude,Pabar_vec,'-o'); hold on;
-plot(altitude,Pv_vec,'-o');
-title('partial pressure v.s. altitude');
-xlabel('altitude'); ylabel('partial pressure');
+plot(beta_vec,PAbar_vec,'-o'); hold on;
+plot(beta_vec,Pabar_vec,'-o'); hold on;
+plot(beta_vec,Pv_vec,'-o');
+title('partial pressure v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('partial pressure');
 legend('PA','Pa','Pv');
 
 %% set 2: concentration v.s. altitude
 figure;
 subplot(2,2,1);
-plot(altitude,cAbar_vec,'-o');
-title('mean alveolar O2 concentration v.s. altitude');
-xlabel('altitude'); ylabel('cA');
+plot(beta_vec,cAbar_vec,'-o');
+title('mean alveolar O2 concentration v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('cA');
 
 subplot(2,2,2);
-plot(altitude,cabar_vec,'-o');
-title('mean arterial O2 concentration v.s. altitude');
-xlabel('altitude'); ylabel('ca');
+plot(beta_vec,cabar_vec,'-o');
+title('mean arterial O2 concentration v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('ca');
 
 subplot(2,2,3);
-plot(altitude,cv_vec,'-o');
-title('venous O2 concentration v.s. altitude');
-xlabel('altitude'); ylabel('cv');
+plot(beta_vec,cv_vec,'-o');
+title('venous O2 concentration v.s. beta at altitude 121.4');
+xlabel('beta'); ylabel('cv');
 
 subplot(2,2,4);
-plot(altitude,cAbar_vec,'-o'); hold on;
-plot(altitude,cabar_vec,'-o'); hold on;
-plot(altitude,cv_vec,'-o');
-title('O2 concentration v.s. altitude');
-xlabel('altitude'); ylabel('concentration');
+plot(beta_vec,cAbar_vec,'-o'); hold on;
+plot(beta_vec,cabar_vec,'-o'); hold on;
+plot(beta_vec,cv_vec,'-o');
+title('concentration v.s. altitude');
+xlabel('beta'); ylabel('concentration');
 legend('cA','ca','cv');
