@@ -3,11 +3,12 @@ clear all
 clf
 global Pstar cstar n maxcount M Q camax RT cI;
 % redeclare cstar
-cref=0.2/(22.4*(310/273));
-cstar_vec = cref:-0.0001:0.002;
+cstar = 0.0021;
+beta_vec = 0;
+cref=0.2/(22.4*(310/273))
 cI = cref;
-for i = 1:length(cstar_vec)
-    cstar = cstar_vec(i);    
+for i = 1:length(beta_vec)
+    
     setup_lung
     cvsolve
     outchecklung
@@ -28,62 +29,62 @@ end
 %% Set 1 partial pressure figures;
 figure;
 subplot(2,2,1);
-plot(cstar_vec,PI_vec,'-o');
-title('Inspired O2 partial pressure v.s. cstar');
-xlabel('cstar'); ylabel('PI');
+plot(beta_vec,PI_vec,'-o');
+title('Inspired O2 partial pressure v.s. beta');
+xlabel('beta'); ylabel('PI');
 
 subplot(2,2,2);
-plot(cstar_vec,PAbar_vec,'-o');
-title('Mean alveolar O2 partial pressure v.s. cstar');
-xlabel('cstar'); ylabel('PAbar');
+plot(beta_vec,PAbar_vec,'-o');
+title('Mean alveolar O2 partial pressure v.s. beta');
+xlabel('beta'); ylabel('PAbar');
 
 subplot(2,2,3)
-plot(cstar_vec,Pabar_vec,'-o');
-title('Mean arterial O2 concentration v.s. cstar');
-xlabel('cstar'); ylabel('Pabar');
+plot(beta_vec,Pabar_vec,'-o');
+title('Mean arterial O2 concentration v.s. beta');
+xlabel('beta'); ylabel('Pabar');
 
 subplot(2,2,4);
-plot(cstar_vec,Pv_vec,'-o');
-title('Venous O2 concentration v.s. cstar');
-xlabel('cstar'); ylabel('Pv');
+plot(beta_vec,Pv_vec,'-o');
+title('Venous O2 concentration v.s. beta');
+xlabel('beta'); ylabel('Pv');
 
 figure;
-plot(cstar_vec,PI_vec,'-o'); hold on;
-plot(cstar_vec,PAbar_vec,'-o'); hold on;
-plot(cstar_vec,Pabar_vec,'-o'); hold on;
-plot(cstar_vec,Pv_vec,'-o');
-title('partial pressure v.s. cstar');
-xlabel('cstar'); ylabel('partial pressure');
-legend('PickableParts',)
+plot(beta_vec,PI_vec,'-o'); hold on;
+plot(beta_vec,PAbar_vec,'-o'); hold on;
+plot(beta_vec,Pabar_vec,'-o'); hold on;
+plot(beta_vec,Pv_vec,'-o');
+title('partial pressure v.s. beta');
+xlabel('beta'); ylabel('partial pressure');
+legend('PI','PA','Pa','Pv');
 
 %% Set 2 Concentration 
 figure;
 subplot(2,2,1);
-plot(cstar_vec,cI_vec,'-o');
-title('Inspiration O2 concentration v.s. cstar');
-xlabel('cstar'); ylabel('cI');
+plot(beta_vec,cI_vec,'-o');
+title('Inspiration O2 concentration v.s. beta');
+xlabel('beta'); ylabel('cI');
 
 subplot(2,2,2);
-plot(cstar_vec,cAbar_vec,'-o');
-title('Mean alveolar O2 concentration v.s. cstar');
-xlabel('cstar'); ylabel('cA');
+plot(beta_vec,cAbar_vec,'-o');
+title('Mean alveolar O2 concentration v.s. beta');
+xlabel('beta'); ylabel('cA');
 
 subplot(2,2,3);
-plot(cstar_vec,cabar_vec,'-o');
-title('Mean arterial O2 concentration v.s. cstar');
-xlabel('cstar'); ylabel('ca');
+plot(beta_vec,cabar_vec,'-o');
+title('Mean arterial O2 concentration v.s. beta');
+xlabel('beta'); ylabel('ca');
 
 subplot(2,2,4);
-plot(cstar_vec,cv_vec,'-o');
-title('Venous O2 concentration v.s. cstar');
-xlabel('cstar'); ylabel('cv');
+plot(beta_vec,cv_vec,'-o');
+title('Venous O2 concentration v.s. beta');
+xlabel('beta'); ylabel('cv');
 
 figure;
-plot(cstar_vec,cI_vec,'-o'); hold on;
-plot(cstar_vec,cAbar_vec,'-o'); hold on;
-plot(cstar_vec,cabar_vec,'-o'); hold on;
-plot(cstar_vec,cv_vec,'-o');
-title('concentration of O2 v.s. cstar');
-xlabel('cstar'); ylabel('concentration of O2');
-
+plot(beta_vec,cI_vec,'-o'); hold on;
+plot(beta_vec,cAbar_vec,'-o'); hold on;
+plot(beta_vec,cabar_vec,'-o'); hold on;
+plot(beta_vec,cv_vec,'-o');
+title('concentration of O2 v.s. beta');
+xlabel('beta'); ylabel('concentration of O2');
+legend('cI','cA','ca','cv');
 
