@@ -4,13 +4,12 @@ clf
 
 % only for task 5
 global Pstar cstar n maxcount M Q camax RT cI;
-cI_vec = [0:0.01:1];
+%cI_vec = [0:0.01:1];
 
-for j = 1:length(cI_vec)
-    cI = cI_vec(j);
-end
-
+cref=0.2/(22.4*(310/273));
+cI_vec = 0.005:0.0001:cref;
 for i = 1:length(cI_vec)
+    cI = cI_vec(i);
     setup_lung
     cvsolve
     outchecklung
