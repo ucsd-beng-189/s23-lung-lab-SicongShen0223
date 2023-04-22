@@ -6,7 +6,8 @@ global Pstar cstar n maxcount M Q camax RT cI;
 altitude = 0:1:99;
 mole_standard = 22.4 + altitude;
 cref_vec = 0.2./(mole_standard.*(310/273));
-
+cstar = 0.0021;
+%%
 for i = 1:length(cref_vec)
     cref = cref_vec(i);
     setup_lung
