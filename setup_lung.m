@@ -2,7 +2,7 @@
 %heterogeneity parameter (0<=beta<=1):
 %beta=0 for homogenous lung
 %beta=1 for no ventilation/perfusion correlation
-beta=0.5
+%beta=0.5
 %
 %number of iterations used in bisection:
 maxcount=20
@@ -63,8 +63,8 @@ av=(a1+a2)/2;
 VA=VAbar*(a1*beta+av*(1-beta));
 Q = Qbar*(a2*beta+av*(1-beta));
 r=VA./Q;
-figure(1)
-plot(Q,VA,'.')
+% figure(1)
+% plot(Q,VA,'.')
 
 %find actual values of 
 %VAtotal, Qtotal, VAbar, and Qbar:
