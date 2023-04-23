@@ -3,12 +3,13 @@ clear all
 clf
 global Pstar cstar n maxcount M Q camax RT cI;
 
-altitude = 0:1:122;
+altitude = 0:1:99;
 mole_standard = 22.4 + altitude;
 cref_vec = 0.2./(mole_standard.*(310/273));
 
 for i = 1:length(cref_vec)
     cref = cref_vec(i);
+    cstar = 1.5*cref;
     setup_lung
     cvsolve
     outchecklung
