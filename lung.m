@@ -3,7 +3,7 @@ clear all
 clf
 global Pstar cstar n maxcount M Q camax RT cI;
 
-altitude = 0:1:99;
+altitude = 0:1:120;
 mole_standard = 22.4 + altitude;
 cref_vec = 0.2./(mole_standard.*(310/273));
 
